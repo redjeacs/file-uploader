@@ -1,9 +1,9 @@
-const expressSession = require("express-session");
+const session = require("express-session");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const { PrismaClient } = require("@prisma/client");
 
-app.use(
-  expressSession({
+module.exports = () =>
+  session({
     secret: "some secret!",
     resave: true,
     saveUninitialized: true,
@@ -13,5 +13,4 @@ app.use(
       dbRecordIdFunction: undefined,
     }),
     cookie: { maxAge: 24 * 60 * 60 * 1000 }, // 1 day
-  })
-);
+  });
