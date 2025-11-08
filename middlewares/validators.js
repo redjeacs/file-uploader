@@ -24,10 +24,26 @@ exports.signupValidator = [
     .withMessage("username " + length),
   body("confirmPassword")
     .trim()
-    .notEmpty.withMessage("password confirmation " + emptyMsg)
+    .notEmpty()
+    .withMessage("password confirmation " + emptyMsg)
     .custom((value, { req }) => {
       if (value !== req.body.password)
         throw new Error("Passwords do not match");
       return true;
     }),
+];
+
+exports.signinValidator = [
+  body("username")
+    .trim()
+    .notEmpty()
+    .withMessage("username " + emptyMsg)
+    .isLength({ min: 1, max: 50 })
+    .withMessage("username " + length),
+  body("password")
+    .trim()
+    .notEmpty()
+    .withMessage("password " + emptyMsg)
+    .isLength({ min: 1, max: 50 })
+    .withMessage("username " + length),
 ];

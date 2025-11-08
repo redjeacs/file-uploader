@@ -7,6 +7,7 @@ const sessionConfig = require("./config/sessionConfig");
 const PORT = process.env.PORT || 8000;
 
 const indexRouter = require("./routes/indexRouter");
+const binderRouter = require("./routes/binderRouter");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -28,6 +29,7 @@ require("./config/passportConfig");
 // Routes
 
 app.use("/", indexRouter);
+app.use("/binder", binderRouter);
 
 // Error
 

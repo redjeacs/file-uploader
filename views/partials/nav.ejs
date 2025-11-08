@@ -1,0 +1,15 @@
+<header>
+  <div class="left"><i class="fa-solid fa-cloud"></i> FileUploader</div>
+  <div class="right">
+    <% if(!locals.currentUser) { %>
+    <a href="/signin"><i class="fa-solid fa-right-to-bracket"></i> Sign in</a>
+    <a href="/signup"><i class="fa-solid fa-user-plus"></i> Sign up</a>
+    <% } else { %>
+    <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="/binder"><i class="fa-solid fa-folder"></i> Binder</a>
+    <a href="/signout"
+      ><i class="fa-solid fa-right-from-bracket"></i> Sign out</a
+    >
+    <% } %>
+  </div>
+</header>

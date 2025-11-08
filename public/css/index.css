@@ -7,8 +7,36 @@
   line-height: 1.6;
 }
 
-html {
+html,
+body {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+}
+
+/* Header */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  padding: 1rem;
+  background-color: lightgray;
+  font-size: 1.5rem;
+
+  .right {
+    display: flex;
+    gap: 2rem;
+    font-size: 1.2rem;
+    a {
+      display: flex;
+      text-decoration: none;
+      color: inherit;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+  }
 }
 
 /* Footer */
@@ -23,4 +51,14 @@ footer {
   font-size: 1rem;
   font-weight: bold;
   padding: 5px;
+}
+
+/* Main */
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  flex: 1;
 }
