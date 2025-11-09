@@ -23,19 +23,19 @@ header {
   padding: 1rem;
   background-color: lightgray;
   font-size: 1.5rem;
+  a {
+    display: flex;
+    text-decoration: none;
+    color: inherit;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
 
   .right {
     display: flex;
     gap: 2rem;
     font-size: 1.2rem;
-    a {
-      display: flex;
-      text-decoration: none;
-      color: inherit;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
   }
 }
 

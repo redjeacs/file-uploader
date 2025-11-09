@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/form.css" />
     <script
       src="https://kit.fontawesome.com/81e5ddd343.js"
       crossorigin="anonymous"
@@ -13,26 +14,17 @@
   <body>
     <%- include('partials/nav') %> <%- include('partials/errors') %>
     <main>
-      <form action="/signup" method="post">
-        <label for="username">Username: </label>
-        <input type="text" id="username" name="username" />
-        <label for="password">Password: </label>
-        <input type="password" id="password" name="password" />
-        <label for="confirmPassword">Confirm Password: </label>
-        <input type="password" id="confirmPassword" name="confirmPassword" />
-        <button type="submit">Sign up</button>
-      </form>
       <div class="login-container">
         <div class="login-card">
           <div class="login-header">
-            <h2>Welcome Back</h2>
-            <p>Sign in to your account</p>
+            <h2>Hello</h2>
+            <p>Sign up for an account</p>
           </div>
 
           <form
             class="login-form"
             id="loginForm"
-            action="/signin"
+            action="/signup"
             method="post"
           >
             <div class="form-group">
@@ -59,19 +51,28 @@
               </div>
             </div>
 
-            <div class="form-options">
-              <label class="remember-wrapper">
-                <input type="checkbox" id="remember" name="remember" />
-                <span class="checkbox-label">
-                  <span class="checkmark"></span>
-                  Remember me
-                </span>
-              </label>
-              <a href="#" class="forgot-password">Forgot password?</a>
+            <div class="form-group">
+              <div class="input-wrapper password-wrapper">
+                <label for="confirmPassword">Confirm Password: </label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                />
+                <button
+                  type="button"
+                  class="password-toggle"
+                  id="passwordToggle"
+                  aria-label="Toggle password visibility"
+                >
+                  <span class="eye-icon"></span>
+                </button>
+                <span class="focus-border"></span>
+              </div>
             </div>
 
             <button type="submit" class="login-btn btn">
-              <span class="btn-text">Sign In</span>
+              <span class="btn-text">Sign up</span>
               <span class="btn-loader"></span>
             </button>
           </form>
@@ -82,17 +83,15 @@
 
           <div class="social-login">
             <button type="button" class="social-btn google-btn">
-              <span class="social-icon google-icon"></span>
-              Google
-            </button>
-            <button type="button" class="social-btn github-btn">
-              <span class="social-icon github-icon"></span>
-              GitHub
+              <a href="/signin/demo" class="demo-link">
+                <i class="fa-solid fa-id-card"></i>
+                Demo Account
+              </a>
             </button>
           </div>
 
           <div class="signup-link">
-            <p>Don't have an account? <a href="/signup">Sign up</a></p>
+            <p>Already have an account? <a href="/signin">Sign in</a></p>
           </div>
 
           <div class="success-message" id="successMessage">

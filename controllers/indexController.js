@@ -56,6 +56,22 @@ exports.signinPost = [
   },
 ];
 
+exports.demoSignin = (req, res, next) => {
+  req.body = req.body || {};
+
+  req.body.username = "demo";
+  req.body.password = process.env.DEMO_PASSWORD;
+
+  try {
+    passport.authenticate("local", {
+      successRedirect: "/",
+      failureRedirect: "/signin",
+    })(req, res, next);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 exports.signoutGet = async (req, res, next) => {
   req.logout(async (err) => {
     if (err) {

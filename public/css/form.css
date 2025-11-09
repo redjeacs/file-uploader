@@ -504,6 +504,11 @@ body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+.demo-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .social-icon {
   width: 20px;
   height: 20px;
