@@ -2,8 +2,9 @@ const db = require("../db/queries");
 
 exports.renderBinder = async (req, res) => {
   if (req.user) {
-    const user = await db.getUser("id", req.user.id);
-    res.render("binder", { user: user });
+    const userId = req.user.id;
+    const data = await db.getUser("id", userId);
+    res.render("binder", { data: data });
   } else {
     res.render("signin");
   }
@@ -15,6 +16,9 @@ exports.createFolder = async (req, res) => {
   res.redirect("/binder");
 };
 
-exports.getFolder = async (req, res) => {
+exports.renderFolder = async (req, res) => {
   const folderId = req.params.folderId;
+  const data = await db.getFolder("id", folderId);
+  console.log(data);
+  res.render("folder", { data: data });
 };

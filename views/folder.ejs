@@ -10,14 +10,19 @@
       src="https://kit.fontawesome.com/81e5ddd343.js"
       crossorigin="anonymous"
     ></script>
-    <title>Binder | FileUploader</title>
+    <title>Folder | FileUploader</title>
   </head>
   <body>
     <%- include('partials/nav') %>
     <main>
       <div class="binder">
+        <a href="/binder" class="binder-link"
+          ><i class="fa-solid fa-arrow-left"></i>My Binder</a
+        >
         <div class="binder-header">
-          <div class="left"><i class="fa-solid fa-folder"></i> My Binder</div>
+          <div class="left">
+            <div><i class="fa-solid fa-folder"></i> <%= data.name %></div>
+          </div>
           <div class="right">
             <a href="/binder/folder"
               ><i class="fa-solid fa-folder-plus"></i> new folder</a
@@ -37,29 +42,7 @@
               <th>Options</th>
             </tr>
           </thead>
-          <% if (data.folders) { data.folders.forEach((folder) => { %>
-          <tr onclick="window.location.href = '/binder/<%= folder.id %>'">
-            <td><%= folder.name %></td>
-            <td><%= folder.size %></td>
-            <td><%= folder.createdAt %></td>
-            <td><%= folder.name %></td>
-            <td>
-              <div class="dropdown">
-                <button
-                  onclick="dropdown()"
-                  class="dropbtn"
-                  id="<%= folder.id %>"
-                >
-                  ...
-                </button>
-                <div id="myDropdown-<%= folder.id %>" class="dropdown-content">
-                  <a href="#">Edit</a>
-                  <a href="#">Delete</a>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <% })} %> <% if (data.files) { data.files.forEach((file) => { %>
+          <% if (data.files.length !== 0) { data.files.forEach((file) => { %>
           <tr>
             <td><%= file.name %></td>
             <td><%= file.size %></td>
@@ -75,7 +58,11 @@
               </div>
             </td>
           </tr>
-          <% })} %>
+          <% })} else { %>
+          <tr>
+            <td>This folder is empty</td>
+          </tr>
+          <% } %>
         </table>
       </div>
     </main>

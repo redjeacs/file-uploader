@@ -27,17 +27,26 @@
 table {
   border: 1px solid lightgray;
   border-collapse: collapse;
+}
 
-  thead {
-    background-color: lightgray;
-  }
+thead {
+  background-color: lightgray;
+}
 
-  th {
-    padding: 0.5rem;
-    text-align: start;
-  }
+th {
+  padding: 0.5rem;
+  text-align: start;
+}
 
-  td {
-    padding: 1rem 0.5rem;
-  }
+td {
+  padding: 0 0.5rem;
+}
+
+tr {
+  border-bottom: 1px solid lightgray;
+}
+
+tr:hover {
+  cursor: pointer;
+  background-color: rgb(245, 244, 244);
 }

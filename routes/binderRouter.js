@@ -4,6 +4,6 @@ const binderController = require("../controllers/binderController");
 
 binderRouter.get("/", binderController.renderBinder);
 binderRouter.get("/folder", binderController.createFolder);
-binderRouter.get("/:folderId", binderController.getFolder);
+binderRouter.get("/:folderId", binderController.renderFolder);
 
 module.exports = binderRouter;

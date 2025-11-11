@@ -32,3 +32,12 @@ exports.createFolder = async (userId) => {
     },
   });
 };
+
+exports.getFolder = async (colName, query) => {
+  const key = { [colName]: query };
+  const folder = await prisma.folder.findUnique({
+    where: key,
+    include: { files: true },
+  });
+  return folder;
+};
