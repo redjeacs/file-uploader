@@ -50,10 +50,11 @@
             <td><%= file.name %></td>
             <td>
               <div class="dropdown">
-                <button onclick="dropdown()" class="dropbtn">...</button>
+                <button class="dropbtn">...</button>
                 <div id="myDropdown" class="dropdown-content">
-                  <a href="#">Edit</a>
-                  <a href="#">Delete</a>
+                  <a href="/">Download</a>
+                  <a href="/">Edit</a>
+                  <a href="/">Delete</a>
                 </div>
               </div>
             </td>
@@ -69,22 +70,22 @@
     <%- include('partials/footer') %>
   </body>
   <script>
-    function dropdown() {
-      document
-        .getElementById("myDropdown-" + buttonId.split("-")[2])
-        .classList.toggle("show");
-    }
-    window.onclick = function (event) {
-      if (!event.target.matches(".dropbtn")) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains("show")) {
-            openDropdown.classList.remove("show");
-          }
+    document.querySelectorAll(".dropbtn").forEach((button) => {
+      button.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const dropdowns = button.nextElementSibling;
+        if (dropdowns.classList.contains("show")) {
+          dropdowns.classList.remove("show");
+        } else {
+          dropdowns.classList.add("show");
         }
-      }
-    };
+      });
+    });
+    document.addEventListener("click", (e) => {
+      document.querySelectorAll(".dropbtn").forEach((button) => {
+        const dropdowns = button.nextElementSibling;
+        dropdowns.classList.remove("show");
+      });
+    });
   </script>
 </html>

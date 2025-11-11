@@ -19,6 +19,5 @@ exports.createFolder = async (req, res) => {
 exports.renderFolder = async (req, res) => {
   const folderId = req.params.folderId;
   const data = await db.getFolder("id", folderId);
-  console.log(data);
   res.render("folder", { data: data });
 };

@@ -37,7 +37,8 @@
               <th>Options</th>
             </tr>
           </thead>
-          <% if (data.folders) { data.folders.forEach((folder) => { %>
+          <% if (data.folders.length !== 0 || data.filess.length !== 0) { %> <%
+          data.folders.forEach((folder) => { %>
           <tr onclick="window.location.href = '/binder/<%= folder.id %>'">
             <td><%= folder.name %></td>
             <td><%= folder.size %></td>
@@ -45,21 +46,15 @@
             <td><%= folder.name %></td>
             <td>
               <div class="dropdown">
-                <button
-                  onclick="dropdown()"
-                  class="dropbtn"
-                  id="<%= folder.id %>"
-                >
-                  ...
-                </button>
-                <div id="myDropdown-<%= folder.id %>" class="dropdown-content">
-                  <a href="#">Edit</a>
-                  <a href="#">Delete</a>
+                <button class="dropbtn">...</button>
+                <div id="myDropdown" class="dropdown-content">
+                  <a href="/">Edit</a>
+                  <a href="/">Delete</a>
                 </div>
               </div>
             </td>
           </tr>
-          <% })} %> <% if (data.files) { data.files.forEach((file) => { %>
+          <% })%> <% data.files.forEach((file) => { %>
           <tr>
             <td><%= file.name %></td>
             <td><%= file.size %></td>
@@ -67,37 +62,41 @@
             <td><%= file.name %></td>
             <td>
               <div class="dropdown">
-                <button onclick="dropdown()" class="dropbtn">...</button>
+                <button class="dropbtn">...</button>
                 <div id="myDropdown" class="dropdown-content">
-                  <a href="#">Edit</a>
-                  <a href="#">Delete</a>
+                  <a href="/">Edit</a>
+                  <a href="/">Delete</a>
                 </div>
               </div>
             </td>
           </tr>
-          <% })} %>
+          <% })} else { %>
+          <tr>
+            <td>Your binder is empty</td>
+          </tr>
+          <% } %>
         </table>
       </div>
     </main>
     <%- include('partials/footer') %>
   </body>
   <script>
-    function dropdown() {
-      document
-        .getElementById("myDropdown-" + buttonId.split("-")[2])
-        .classList.toggle("show");
-    }
-    window.onclick = function (event) {
-      if (!event.target.matches(".dropbtn")) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains("show")) {
-            openDropdown.classList.remove("show");
-          }
+    document.querySelectorAll(".dropbtn").forEach((button) => {
+      button.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const dropdowns = button.nextElementSibling;
+        if (dropdowns.classList.contains("show")) {
+          dropdowns.classList.remove("show");
+        } else {
+          dropdowns.classList.add("show");
         }
-      }
-    };
+      });
+    });
+    document.addEventListener("click", (e) => {
+      document.querySelectorAll(".dropbtn").forEach((button) => {
+        const dropdowns = button.nextElementSibling;
+        dropdowns.classList.remove("show");
+      });
+    });
   </script>
 </html>
