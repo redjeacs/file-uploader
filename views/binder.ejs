@@ -42,7 +42,7 @@
           <tr onclick="window.location.href = '/binder/<%= folder.id %>'">
             <td><%= folder.name %></td>
             <td><%= folder.size %></td>
-            <td><%= folder.createdAt %></td>
+            <td><%= folder.formattedCreatedAt %></td>
             <td><%= folder.name %></td>
             <td>
               <div class="dropdown">
@@ -58,7 +58,7 @@
           <tr>
             <td><%= file.name %></td>
             <td><%= file.size %></td>
-            <td><%= file.createdAt %></td>
+            <td><%= file.formattedCreatedAt %></td>
             <td><%= file.name %></td>
             <td>
               <div class="dropdown">
