@@ -1,5 +1,8 @@
+const { validationResult, matchedData } = require("express-validator");
+const CustomNotFoundError = require("../middlewares/CustomNotFoundError");
 const db = require("../db/queries");
 const { formatDate } = require("../middlewares/formatter");
+const validators = require("../middlewares/validators");
 
 exports.renderBinder = async (req, res) => {
   if (req.user) {
@@ -28,3 +31,33 @@ exports.renderFolder = async (req, res) => {
   const data = await db.getFolder("id", folderId);
   res.render("folder", { data: data });
 };
+
+exports.deleteFolder = async (req, res) => {
+  const folderId = req.params.folderId;
+  await db.deleteFolder(folderId);
+  res.redirect("/binder");
+};
+
+exports.renderEditFolderForm = async (req, res) => {
+  const folderId = req.params.folderId;
+  res.render("editFolder", { folderId: folderId });
+};
+
+exports.editFolder = [
+  validators.editValidator,
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render("editFolder", { errors: errors.array() });
+    }
+    try {
+      const data = matchedData(req);
+      if (!data) throw new CustomNotFoundError("login information is invalid!");
+      const folderId = req.params.folderId;
+      await db.editFolder(folderId, data.name);
+      res.redirect("/binder");
+    } catch (err) {
+      return next(err);
+    }
+  },
+];

@@ -47,3 +47,12 @@ exports.signinValidator = [
     .isLength({ min: 1, max: 50 })
     .withMessage("username " + length),
 ];
+
+exports.editValidator = [
+  body("name")
+    .trim()
+    .notEmpty()
+    .withMessage("A name " + emptyMsg)
+    .isLength({ min: 1, max: 50 })
+    .withMessage("name " + length),
+];

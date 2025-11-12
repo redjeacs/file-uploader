@@ -37,9 +37,11 @@
               <th>Options</th>
             </tr>
           </thead>
-          <% if (data.folders.length !== 0 || data.filess.length !== 0) { %> <%
+          <% if (data.folders.length !==0 || data.files.length !== 0 ) { %> <%
           data.folders.forEach((folder) => { %>
-          <tr onclick="window.location.href = '/binder/<%= folder.id %>'">
+          <tr
+            onclick="window.location.href = '/binder/folder/<%= folder.id %>'"
+          >
             <td><%= folder.name %></td>
             <td><%= folder.size %></td>
             <td><%= folder.formattedCreatedAt %></td>
@@ -48,14 +50,14 @@
               <div class="dropdown">
                 <button class="dropbtn">...</button>
                 <div id="myDropdown" class="dropdown-content">
-                  <a href="/">Edit</a>
-                  <a href="/">Delete</a>
+                  <a href="/binder/folder/edit/<%- folder.id %>">Edit</a>
+                  <a href="/binder/folder/delete/<%- folder.id %>">Delete</a>
                 </div>
               </div>
             </td>
           </tr>
           <% })%> <% data.files.forEach((file) => { %>
-          <tr>
+          <tr onclick="sindow.location.href = '/binder/file/<%= file.id %>'">
             <td><%= file.name %></td>
             <td><%= file.size %></td>
             <td><%= file.formattedCreatedAt %></td>

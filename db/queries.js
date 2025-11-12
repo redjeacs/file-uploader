@@ -41,3 +41,22 @@ exports.getFolder = async (colName, query) => {
   });
   return folder;
 };
+
+exports.editFolder = async (folderId, newName) => {
+  await prisma.folder.update({
+    data: {
+      name: newName,
+    },
+    where: {
+      id: folderId,
+    },
+  });
+};
+
+exports.deleteFolder = async (folderId) => {
+  await prisma.folder.delete({
+    where: {
+      id: folderId,
+    },
+  });
+};
