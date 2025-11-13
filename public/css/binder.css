@@ -42,6 +42,14 @@ td {
   padding: 0 0.5rem;
 }
 
+.name-data {
+  width: 50%;
+}
+
+.options-data {
+  width: 5%;
+}
+
 tr {
   border-bottom: 1px solid lightgray;
 }
@@ -49,4 +57,52 @@ tr {
 tr:hover {
   cursor: pointer;
   background-color: rgb(245, 244, 244);
+}
+
+#modal {
+  position: absolute;
+  display: none;
+  background-color: white;
+  top: 10%;
+  left: 50;
+  padding: 20px;
+  border: 1px solid black;
+}
+
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.file-upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.input {
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+
+.file-upload-btn {
+  width: 100%;
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  background-color: transparent;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.file-modal.show {
+  display: block !important;
 }

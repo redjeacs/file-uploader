@@ -37,8 +37,8 @@ model File {
   size       Int
   path       String
   uploadedAt DateTime @default(now())
-  userId     String
+  userId     String?
   folderId   String?
   folder     Folder?  @relation(fields: [folderId], references: [id], onDelete: Cascade)
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user       User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

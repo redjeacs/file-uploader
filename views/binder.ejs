@@ -15,6 +15,29 @@
   <body>
     <%- include('partials/nav') %>
     <main>
+      <div class="file-modal" id="modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <button onclick="toggleModal()" class="close-modal-btn">X</button>
+            <div class="modal-header">
+              <h2 class="modal-title">Upload File</h2>
+            </div>
+            <div class="modal-body">
+              <form
+                action="/binder/file"
+                method="post"
+                class="file-upload-form"
+                enctype="multipart/form-data"
+              >
+                <div class="input">
+                  <input type="file" id="file" name="file" required />
+                </div>
+                <button class="file-upload-btn">Upload</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="binder">
         <div class="binder-header">
           <div class="left"><i class="fa-solid fa-folder"></i> My Binder</div>
@@ -22,9 +45,9 @@
             <a href="/binder/folder"
               ><i class="fa-solid fa-folder-plus"></i> new folder</a
             >
-            <a href="/"
-              ><i class="fa-solid fa-file-arrow-up"></i> upload file</a
-            >
+            <button onclick="toggleModal()">
+              <i class="fa-solid fa-file-arrow-up"></i> upload file
+            </button>
           </div>
         </div>
         <table>
@@ -42,11 +65,11 @@
           <tr
             onclick="window.location.href = '/binder/folder/<%= folder.id %>'"
           >
-            <td><%= folder.name %></td>
-            <td><%= folder.size %></td>
-            <td><%= folder.formattedCreatedAt %></td>
-            <td><%= folder.name %></td>
-            <td>
+            <td class="name-data"><%= folder.name %></td>
+            <td class="size-data"><%= folder.size %></td>
+            <td class="created-data"><%= folder.formattedCreatedAt %></td>
+            <td class="updated-data"><%= folder.formattedCreatedAt %></td>
+            <td class="options-data">
               <div class="dropdown">
                 <button class="dropbtn">...</button>
                 <div id="myDropdown" class="dropdown-content">
@@ -60,14 +83,14 @@
           <tr onclick="sindow.location.href = '/binder/file/<%= file.id %>'">
             <td><%= file.name %></td>
             <td><%= file.size %></td>
-            <td><%= file.formattedCreatedAt %></td>
-            <td><%= file.name %></td>
+            <td><%= file.formattedUploadedAt %></td>
+            <td><%= file.formattedUploadedAt %></td>
             <td>
               <div class="dropdown">
                 <button class="dropbtn">...</button>
                 <div id="myDropdown" class="dropdown-content">
-                  <a href="/">Edit</a>
-                  <a href="/">Delete</a>
+                  <a href="/binder/file/edit/<%= file.id %>">Edit</a>
+                  <a href="/binder/file/delete/<%= file.id %>">Delete</a>
                 </div>
               </div>
             </td>
@@ -83,6 +106,16 @@
     <%- include('partials/footer') %>
   </body>
   <script>
+    function toggleModal() {
+      const fileModal = document.querySelector(".file-modal");
+      console.log(fileModal);
+      if (fileModal.classList.contains("show")) {
+        fileModal.classList.remove("show");
+      } else {
+        fileModal.classList.add("show");
+      }
+    }
+
     document.querySelectorAll(".dropbtn").forEach((button) => {
       button.addEventListener("click", (e) => {
         e.stopPropagation();

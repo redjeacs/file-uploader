@@ -1,4 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
+const { fileLoader } = require("ejs");
 const prisma = new PrismaClient();
 
 exports.getUser = async (colName, query) => {
@@ -33,6 +34,32 @@ exports.createFolder = async (userId) => {
   });
 };
 
+exports.createFile = async (file, userId, folderId = null) => {
+  if (folderId) {
+    await prisma.file.create({
+      data: {
+        name: file.originalname,
+        size: file.size,
+        path: file.path,
+        folder: {
+          connect: { id: folderId },
+        },
+      },
+    });
+  } else {
+    await prisma.file.create({
+      data: {
+        name: file.originalname,
+        size: file.size,
+        path: file.path,
+        user: {
+          connect: { id: userId },
+        },
+      },
+    });
+  }
+};
+
 exports.getFolder = async (colName, query) => {
   const key = { [colName]: query };
   const folder = await prisma.folder.findUnique({
@@ -53,10 +80,29 @@ exports.editFolder = async (folderId, newName) => {
   });
 };
 
+exports.editFile = async (fileId, newName) => {
+  await prisma.file.update({
+    data: {
+      name: newName,
+    },
+    where: {
+      id: fileId,
+    },
+  });
+};
+
 exports.deleteFolder = async (folderId) => {
   await prisma.folder.delete({
     where: {
       id: folderId,
+    },
+  });
+};
+
+exports.deleteFile = async (fileId) => {
+  await prisma.file.delete({
+    where: {
+      id: fileId,
     },
   });
 };
