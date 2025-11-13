@@ -50,7 +50,8 @@ exports.createFile = async (req, res, next) => {
     } else {
       await db.createFile(file, userId, folderId);
     }
-    res.redirect("/binder");
+    const redirectURL = req.get("referer");
+    res.redirect(redirectURL);
   } catch (err) {
     return next(err);
   }
@@ -65,7 +66,8 @@ exports.deleteFolder = async (req, res) => {
 exports.deleteFile = async (req, res) => {
   const fileId = req.params.fileId;
   await db.deleteFile(fileId);
-  res.redirect("/binder");
+  const redirectURL = req.get("referer");
+  res.redirect(redirectURL);
 };
 
 exports.renderEditFolderForm = async (req, res) => {
@@ -109,7 +111,8 @@ exports.editFile = [
       if (!data) throw new CustomNotFoundError("login information is invalid!");
       const fileId = req.params.fileId;
       await db.editFile(fileId, data.name);
-      res.redirect("/binder");
+      const redirectURL = req.get("referer");
+      res.redirect(redirectURL);
     } catch (err) {
       return next(err);
     }
