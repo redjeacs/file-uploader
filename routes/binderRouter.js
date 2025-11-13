@@ -13,11 +13,16 @@ binderRouter.get(
   binderController.renderEditFolderForm
 );
 binderRouter.post("/folder/edit/:folderId", binderController.editFolder);
-
 binderRouter.post("/file", upload.single("file"), binderController.createFile);
+
 binderRouter.get("/file/:fileId", binderController.renderFile);
 binderRouter.get("/file/edit/:fileId", binderController.renderEditFileForm);
 binderRouter.get("/file/delete/:fileId", binderController.deleteFile);
 binderRouter.post("/file/edit/:fileId", binderController.editFile);
+binderRouter.post(
+  "/file/:folderId",
+  upload.single("file"),
+  binderController.createFile
+);
 
 module.exports = binderRouter;

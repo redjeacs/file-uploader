@@ -40,11 +40,12 @@ exports.createFolder = async (req, res) => {
 
 exports.createFile = async (req, res, next) => {
   const file = req.file;
+  const userId = req.user.id;
   if (!file) return res.redirect("/binder");
   try {
     const folderId = req.params.folderId;
+    console.log(folderId);
     if (!folderId) {
-      const userId = req.user.id;
       await db.createFile(file, userId);
     } else {
       await db.createFile(file, userId, folderId);
