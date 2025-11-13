@@ -63,7 +63,7 @@
             </tr>
           </thead>
           <% if (data.files.length !== 0) { data.files.forEach((file) => { %>
-          <tr>
+          <tr onclick="window.location.href = '/binder/file/<%= file.id %>'">
             <td class="name-data"><%= file.name %></td>
             <td class="size-data"><%= file.size %></td>
             <td class="created-data"><%= file.formattedUploadedAt %></td>
@@ -106,9 +106,10 @@
         if (dropdowns.classList.contains("show")) {
           dropdowns.classList.remove("show");
         } else {
-          const allDropdowns = document.querySelectorAll('.dropdown-content')
-          console.log(allDropdowns)
-          allDropdowns.classList.remove('show')
+          const allDropdowns = document.querySelectorAll(".dropdown-content");
+          allDropdowns.forEach((dropdowns) =>
+            dropdowns.classList.remove("show")
+          );
           dropdowns.classList.add("show");
         }
       });

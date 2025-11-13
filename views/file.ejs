@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/index.css" />
     <link rel="stylesheet" href="/css/binder.css" />
-    <link rel="stylesheet" href="/css/dropdown.css" />
+    <link rel="stylesheet" href="/css/file.css" />
     <script
       src="https://kit.fontawesome.com/81e5ddd343.js"
       crossorigin="anonymous"
@@ -15,27 +15,35 @@
   <body>
     <%- include('partials/nav') %>
     <main>
-      <h1>file</h1>
+      <div class="binder">
+        <% if (data && data.folderId) { %>
+        <a href="/binder/folder/<%= data.folderId %>" class="binder-link">
+          <i class="fa-solid fa-arrow-left"></i> My Folder
+        </a>
+        <% } else { %>
+        <a href="/binder" class="binder-link">
+          <i class="fa-solid fa-arrow-left"></i> My Binder
+        </a>
+        <% } %>
+        <div class="file">
+          <file-data>
+            <h1 class="name"><%= data.name %></h1>
+            <div class="size"><strong>Size:</strong> <%= data.size %></div>
+            <div class="upload">
+              <strong>Uploaded At:</strong> <%= data.uploadedAt %>
+            </div>
+            <div class="update">
+              <strong>Updated At:</strong> <%= data.uploadedAt %>
+            </div>
+          </file-data>
+          <div class="download">
+            <button class="download-btn">
+              <a href="/binder/file/download/<%= data.id %>">Downlaod</a>
+            </button>
+          </div>
+        </div>
+      </div>
     </main>
     <%- include('partials/footer') %>
   </body>
-  <script>
-    document.querySelectorAll(".dropbtn").forEach((button) => {
-      button.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const dropdowns = button.nextElementSibling;
-        if (dropdowns.classList.contains("show")) {
-          dropdowns.classList.remove("show");
-        } else {
-          dropdowns.classList.add("show");
-        }
-      });
-    });
-    document.addEventListener("click", (e) => {
-      document.querySelectorAll(".dropbtn").forEach((button) => {
-        const dropdowns = button.nextElementSibling;
-        dropdowns.classList.remove("show");
-      });
-    });
-  </script>
 </html>

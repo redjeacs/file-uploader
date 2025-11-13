@@ -1,0 +1,32 @@
+.file {
+  padding: 2rem;
+  background-color: whitesmoke;
+  border: 1px solid lightgray;
+}
+
+.size,
+.upload,
+.update {
+  font-size: 1.2rem;
+}
+
+.download {
+  display: flex;
+  justify-content: end;
+}
+
+.download-btn {
+  padding: 0.5rem 2rem;
+  background-color: white;
+  border: 2px solid black;
+  cursor: pointer;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.download-btn:hover {
+  box-shadow: 1px 1px 1px;
+}

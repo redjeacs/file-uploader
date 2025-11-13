@@ -14,6 +14,23 @@ exports.getUser = async (colName, query) => {
   return user;
 };
 
+exports.getFolder = async (colName, query) => {
+  const where = { [colName]: query };
+  const folder = await prisma.folder.findUnique({
+    where: where,
+    include: { files: true },
+  });
+  return folder;
+};
+
+exports.getFile = async (colName, query) => {
+  const where = { [colName]: query };
+  const file = await prisma.file.findUnique({
+    where: where,
+  });
+  return file;
+};
+
 exports.createUser = async (username, password) => {
   await prisma.user.create({
     data: {
@@ -58,15 +75,6 @@ exports.createFile = async (file, userId, folderId = null) => {
       },
     });
   }
-};
-
-exports.getFolder = async (colName, query) => {
-  const key = { [colName]: query };
-  const folder = await prisma.folder.findUnique({
-    where: key,
-    include: { files: true },
-  });
-  return folder;
 };
 
 exports.editFolder = async (folderId, newName) => {

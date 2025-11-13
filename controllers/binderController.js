@@ -23,6 +23,9 @@ exports.renderBinder = async (req, res) => {
 exports.renderFolder = async (req, res) => {
   const folderId = req.params.folderId;
   const data = await db.getFolder("id", folderId);
+  data.files.forEach((file) => {
+    file.formattedUploadedAt = formatDate(file.uploadedAt);
+  });
   res.render("folder", { data: data });
 };
 
