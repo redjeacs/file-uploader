@@ -50,6 +50,14 @@ td {
   width: 5%;
 }
 
+.size-data {
+  padding-left: 1rem;
+}
+
+.options-data {
+  font-weight: bold;
+}
+
 tr {
   border-bottom: 1px solid lightgray;
 }

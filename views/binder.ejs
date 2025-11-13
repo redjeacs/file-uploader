@@ -66,12 +66,14 @@
             onclick="window.location.href = '/binder/folder/<%= folder.id %>'"
           >
             <td class="name-data"><%= folder.name %></td>
-            <td class="size-data"><%= folder.size %></td>
+            <td class="size-data">-</td>
             <td class="created-data"><%= folder.formattedCreatedAt %></td>
             <td class="updated-data"><%= folder.formattedCreatedAt %></td>
             <td class="options-data">
               <div class="dropdown">
-                <button class="dropbtn">...</button>
+                <button class="dropbtn">
+                  <i class="fa-solid fa-ellipsis"></i>
+                </button>
                 <div id="myDropdown" class="dropdown-content">
                   <a href="/binder/folder/edit/<%- folder.id %>">Edit</a>
                   <a href="/binder/folder/delete/<%- folder.id %>">Delete</a>
@@ -87,8 +89,11 @@
             <td><%= file.formattedUploadedAt %></td>
             <td>
               <div class="dropdown">
-                <button class="dropbtn">...</button>
+                <button class="dropbtn">
+                  <i class="fa-solid fa-ellipsis"></i>
+                </button>
                 <div id="myDropdown" class="dropdown-content">
+                  <a href="/">Download</a>
                   <a href="/binder/file/edit/<%= file.id %>">Edit</a>
                   <a href="/binder/file/delete/<%= file.id %>">Delete</a>
                 </div>
@@ -123,6 +128,10 @@
         if (dropdowns.classList.contains("show")) {
           dropdowns.classList.remove("show");
         } else {
+          const allDropdowns = document.querySelectorAll(".dropdown-content");
+          allDropdowns.forEach((dropdowns) =>
+            dropdowns.classList.remove("show")
+          );
           dropdowns.classList.add("show");
         }
       });

@@ -64,13 +64,13 @@
           </thead>
           <% if (data.files.length !== 0) { data.files.forEach((file) => { %>
           <tr>
-            <td><%= file.name %></td>
-            <td><%= file.size %></td>
-            <td><%= file.formattedCreatedAt %></td>
-            <td><%= file.name %></td>
-            <td>
+            <td class="name-data"><%= file.name %></td>
+            <td class="size-data"><%= file.size %></td>
+            <td class="created-data"><%= file.formattedUploadedAt %></td>
+            <td class="updated-data"><%= file.formattedUploadedAt %></</td>
+            <td class="options-data">
               <div class="dropdown">
-                <button class="dropbtn">...</button>
+                <button class="dropbtn"><i class="fa-solid fa-ellipsis"></i></button>
                 <div id="myDropdown" class="dropdown-content">
                   <a href="/">Download</a>
                   <a href="/binder/file/edit/<%= file.id %>">Edit</a>
@@ -106,6 +106,9 @@
         if (dropdowns.classList.contains("show")) {
           dropdowns.classList.remove("show");
         } else {
+          const allDropdowns = document.querySelectorAll('.dropdown-content')
+          console.log(allDropdowns)
+          allDropdowns.classList.remove('show')
           dropdowns.classList.add("show");
         }
       });
