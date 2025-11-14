@@ -20,8 +20,15 @@
 
   a {
     text-decoration: none;
-    color: inherit;
+    color: #0000ff;
   }
+}
+
+.upload-btn {
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  color: #0000ff;
 }
 
 table {
