@@ -28,7 +28,9 @@
         <div class="file">
           <file-data>
             <h1 class="name"><%= data.name %></h1>
-            <div class="size"><strong>Size:</strong> <%= data.size %></div>
+            <div class="size">
+              <strong>Size:</strong> <%= data.formattedSize %>
+            </div>
             <div class="upload">
               <strong>Uploaded At:</strong> <%= data.uploadedAt %>
             </div>

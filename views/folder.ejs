@@ -65,7 +65,7 @@
           <% if (data.files.length !== 0) { data.files.forEach((file) => { %>
           <tr onclick="window.location.href = '/binder/file/<%= file.id %>'">
             <td class="name-data"><%= file.name %></td>
-            <td class="size-data"><%= file.size %></td>
+            <td class="size-data"><%= file.formattedSize %></td>
             <td class="created-data"><%= file.formattedUploadedAt %></td>
             <td class="updated-data"><%= file.formattedUploadedAt %></</td>
             <td class="options-data">

@@ -84,7 +84,7 @@
           <% })%> <% data.files.forEach((file) => { %>
           <tr onclick="window.location.href = '/binder/file/<%= file.id %>'">
             <td><%= file.name %></td>
-            <td><%= file.size %></td>
+            <td><%= file.formattedSize %></td>
             <td><%= file.formattedUploadedAt %></td>
             <td><%= file.formattedUploadedAt %></td>
             <td>

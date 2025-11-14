@@ -1,7 +1,7 @@
 const { validationResult, matchedData } = require("express-validator");
 const CustomNotFoundError = require("../middlewares/CustomNotFoundError");
 const db = require("../db/queries");
-const { formatDate } = require("../middlewares/formatter");
+const { formatDate, formatBytes } = require("../middlewares/formatter");
 const validators = require("../middlewares/validators");
 const cloudinary = require("../middlewares/cloudinaryConfig");
 const axios = require("axios");
@@ -15,6 +15,7 @@ exports.renderBinder = async (req, res) => {
     });
     data.files.forEach((file) => {
       file.formattedUploadedAt = formatDate(file.uploadedAt);
+      file.formattedSize = formatBytes(file.size);
     });
     res.render("binder", { data: data });
   } else {
@@ -27,6 +28,7 @@ exports.renderFolder = async (req, res) => {
   const data = await db.getFolder("id", folderId);
   data.files.forEach((file) => {
     file.formattedUploadedAt = formatDate(file.uploadedAt);
+    file.formattedSize = formatBytes(file.size);
   });
   res.render("folder", { data: data });
 };
