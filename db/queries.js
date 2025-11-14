@@ -51,13 +51,13 @@ exports.createFolder = async (userId) => {
   });
 };
 
-exports.createFile = async (file, userId, folderId = null) => {
+exports.createFile = async (file, fileUrl, userId, folderId = null) => {
   if (folderId) {
     await prisma.file.create({
       data: {
         name: file.originalname,
         size: file.size,
-        path: file.path,
+        path: fileUrl,
         folder: {
           connect: { id: folderId },
         },
@@ -68,7 +68,7 @@ exports.createFile = async (file, userId, folderId = null) => {
       data: {
         name: file.originalname,
         size: file.size,
-        path: file.path,
+        path: fileUrl,
         user: {
           connect: { id: userId },
         },

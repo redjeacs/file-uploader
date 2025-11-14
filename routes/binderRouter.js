@@ -24,5 +24,6 @@ binderRouter.post(
   upload.single("file"),
   binderController.createFile
 );
+binderRouter.get("/file/download/:fileId", binderController.downloadFile);
 
 module.exports = binderRouter;

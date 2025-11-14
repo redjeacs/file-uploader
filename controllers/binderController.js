@@ -3,6 +3,8 @@ const CustomNotFoundError = require("../middlewares/CustomNotFoundError");
 const db = require("../db/queries");
 const { formatDate } = require("../middlewares/formatter");
 const validators = require("../middlewares/validators");
+const cloudinary = require("../middlewares/cloudinaryConfig");
+const axios = require("axios");
 
 exports.renderBinder = async (req, res) => {
   if (req.user) {
@@ -47,11 +49,14 @@ exports.createFile = async (req, res, next) => {
   if (!file) return res.redirect("/binder");
   try {
     const folderId = req.params.folderId;
-    console.log(folderId);
+    const uploadResult = await cloudinary.uploader.upload(file.path, {
+      resource_type: "auto",
+    });
+    console.log(uploadResult.secure_url);
     if (!folderId) {
-      await db.createFile(file, userId);
+      await db.createFile(file, uploadResult.secure_url, userId);
     } else {
-      await db.createFile(file, userId, folderId);
+      await db.createFile(file, uploadResult.secure_url, userId, folderId);
     }
     const redirectURL = req.get("referer");
     res.redirect(redirectURL);
@@ -114,10 +119,26 @@ exports.editFile = [
       if (!data) throw new CustomNotFoundError("login information is invalid!");
       const fileId = req.params.fileId;
       await db.editFile(fileId, data.name);
-      const redirectURL = req.get("referer");
-      res.redirect(redirectURL);
+      res.redirect("/binder");
     } catch (err) {
       return next(err);
     }
   },
 ];
+
+exports.downloadFile = async (req, res) => {
+  const fileId = req.params.fileId;
+  const file = await db.getFile("id", fileId);
+
+  try {
+    const response = await axios.get(file.path, { responseType: "stream" });
+
+    res.setHeader("Content-Disposition", `attachment; filename="${file.name}"`);
+    res.setHeader("Content-Type", response.headers["content-type"]);
+
+    response.data.pipe(res);
+  } catch (error) {
+    console.error("Error downloading file:", error);
+    res.redirect(`/binder/${file.folderId || ""}`);
+  }
+};
