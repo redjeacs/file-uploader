@@ -1,13 +1,15 @@
 const { PrismaClient } = require("@prisma/client");
 const { fileLoader } = require("ejs");
 const dotenv = require("dotenv");
-const prisma = new PrismaClient({
-  datasources: {
-    db: {
-      url: process.env.DATABASE_URL || process.env.LOCAL_DATABASE_URL,
-    },
-  },
-});
+const { Pool } = require("pg");
+const { PrismaPg } = require("@prisma/adapter-pg");
+const { PrismaClient } = require("@prisma/client");
+
+const db_URL = process.env.DATABASE_URL || process.env.LOCAL_DATABASE_URL;
+
+const pool = new Pool({ connectionString: db_URL });
+const adapter = new PrismaPg({ pool });
+const prisma = new PrismaClient({ adapter });
 
 exports.getUser = async (colName, query) => {
   const key = { [colName]: query };
