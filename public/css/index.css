@@ -62,10 +62,3 @@ main {
   padding: 20px;
   flex: 1;
 }
-
-.upload-btn {
-  border: none;
-  background-color: white;
-  cursor: pointer;
-  color: blue;
-}

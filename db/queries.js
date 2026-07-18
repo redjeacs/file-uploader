@@ -1,6 +1,13 @@
 const { PrismaClient } = require("@prisma/client");
 const { fileLoader } = require("ejs");
-const prisma = new PrismaClient();
+const dotenv = require("dotenv");
+const prisma = new PrismaClient({
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL || process.env.LOCAL_DATABASE_URL,
+    },
+  },
+});
 
 exports.getUser = async (colName, query) => {
   const key = { [colName]: query };
